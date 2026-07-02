@@ -4,18 +4,18 @@ import { Briefcase, Calendar } from 'lucide-react';
 const Experience = () => {
   const experiences = [
     {
-      role: 'Software Engineer',
-      company: 'Tech Solutions Inc.',
-      duration: '2024 - Present',
-      description: 'Architected scalable cloud microservices using Node.js and AWS Lambda. Optimized database queries in PostgreSQL resulting in a 40% reduction in average API response time. Mentored junior developers and instituted automated CI/CD workflows.',
-      skills: ['Node.js', 'AWS', 'PostgreSQL', 'Docker', 'CI/CD']
+      role: 'Research & Software Development Intern',
+      company: 'Plato Lab, IIT Bombay',
+      duration: 'Second Year',
+      description: 'Contributed to cutting-edge research and software development projects at the Indian Institute of Technology, Bombay. Collaborated with researchers and engineers to design scalable algorithms, analyze datasets, and build modular software architectures.',
+      skills: ['Python', 'Algorithms', 'Data Analysis', 'Research & Development', 'Git']
     },
     {
-      role: 'Full Stack Developer (Intern)',
-      company: 'Innovation Labs',
-      duration: '2023 - 2024',
-      description: 'Developed responsive, dynamic single-page web applications using React and Tailwind CSS. Built RESTful APIs and integrated third-party authentication services. Collaborated closely with UI/UX designers to implement pixel-perfect user interfaces.',
-      skills: ['React', 'JavaScript', 'REST API', 'Git', 'Agile']
+      role: 'AI & Robotics Researcher / Developer',
+      company: 'Ivlabs, VNIT Nagpur',
+      duration: 'First Year',
+      description: 'Explored core robotics algorithms, computer vision, and autonomous systems at Visvesvaraya National Institute of Technology. Engineered software modules using Python and C++, participated in technical research discussions, and developed foundational skills in systems programming.',
+      skills: ['Python', 'C++', 'Computer Vision', 'ROS', 'Machine Learning', 'Linux']
     }
   ];
 
