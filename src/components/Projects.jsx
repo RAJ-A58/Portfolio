@@ -1,49 +1,40 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Layers, Star } from 'lucide-react';
+import { ExternalLink, Github, Layers, Star, Code2, Cpu, Compass } from 'lucide-react';
 
 const Projects = () => {
   const [filter, setFilter] = useState('All');
 
   const projects = [
     {
-      title: 'Cloud-Native Distributed E-Commerce API',
-      category: 'Backend & Cloud',
-      description: 'Engineered a highly resilient, event-driven microservices backend using Node.js, AWS Lambda, DynamoDB, and SQS. Capable of handling over 10,000 requests/second with 99.99% uptime.',
-      tags: ['Node.js', 'AWS Lambda', 'DynamoDB', 'Docker', 'REST API'],
-      github: 'https://github.com',
-      live: 'https://example.com',
+      title: 'CamelCatch — Developer Tooling & Web Extensions',
+      category: 'Developer Tooling',
+      description: 'Engineered a real-time Chromium extension to analyze live LeetCode submissions and inject non-intrusive UI alerts for case-sensitivity mismatch errors, streamlining developer debugging workflows.',
+      tags: ['JavaScript (ES6)', 'HTML5 / CSS3', 'Web Extensions API (Manifest V3)', 'Regex', 'Chrome DevTools'],
+      github: 'https://github.com/RAJ-A58',
+      live: 'https://github.com/RAJ-A58',
       featured: true
     },
     {
-      title: 'Real-Time Collaborative Code Editor',
-      category: 'Full Stack',
-      description: 'A browser-based collaborative IDE featuring real-time syntax highlighting, multi-cursor editing via WebSockets, and integrated code execution sandbox powered by Docker containers.',
-      tags: ['React', 'WebSockets', 'Node.js', 'Docker', 'Monaco Editor'],
-      github: 'https://github.com',
-      live: 'https://example.com',
+      title: 'Route Optimisation using OR-Tools',
+      category: 'Algorithms & Optimization',
+      description: 'Modeled and solved vehicle routing problems (VRP) with multiple depots, including Buldhana and Buttibori, and diverse demand locations using advanced constraint programming and CP-SAT solvers.',
+      tags: ['Python', 'Google OR-Tools (CP-SAT)', 'Constraint Programming', 'Operations Research'],
+      github: 'https://github.com/RAJ-A58',
+      live: 'https://github.com/RAJ-A58',
       featured: true
     },
     {
-      title: 'AI-Powered Resume Analytics Platform',
-      category: 'Full Stack',
-      description: 'Built a full-stack SaaS application that utilizes Natural Language Processing (NLP) to score software engineering resumes against job descriptions, offering actionable feedback to job seekers.',
-      tags: ['React', 'Python', 'FastAPI', 'OpenAI API', 'Tailwind'],
-      github: 'https://github.com',
-      live: 'https://example.com',
+      title: 'Real-time Driver Monitoring System (DMS)',
+      category: 'Machine Learning & CV',
+      description: 'Built a real-time computer-vision system to detect driver drowsiness and distraction using head pose estimation. Implemented facial landmark tracking via MediaPipe Face Mesh and utilized Eye Aspect Ratio (EAR) for precise blink detection.',
+      tags: ['Python', 'OpenCV', 'MediaPipe Face Mesh', 'NumPy', 'Computer Vision'],
+      github: 'https://github.com/RAJ-A58',
+      live: 'https://github.com/RAJ-A58',
       featured: true
-    },
-    {
-      role: 'DevOps CI/CD Pipeline Automator',
-      category: 'DevOps',
-      description: 'Automated infrastructure provisioning and continuous integration pipelines using Terraform, GitHub Actions, and AWS ECS for automated zero-downtime container deployments.',
-      tags: ['Terraform', 'AWS ECS', 'GitHub Actions', 'Docker'],
-      github: 'https://github.com',
-      live: 'https://example.com',
-      featured: false
     }
   ];
 
-  const categories = ['All', 'Full Stack', 'Backend & Cloud', 'DevOps'];
+  const categories = ['All', 'Developer Tooling', 'Algorithms & Optimization', 'Machine Learning & CV'];
 
   const filteredProjects = filter === 'All' 
     ? projects 
@@ -55,7 +46,7 @@ const Projects = () => {
         
         <h2 className="section-title">Featured Projects</h2>
         <p className="section-subtitle">
-          A selection of my recent engineering projects, cloud architectures, and full-stack applications.
+          Real-world applications spanning browser tooling extensions, constraint programming optimization, and computer vision systems.
         </p>
 
         {/* Filter Buttons */}
@@ -82,7 +73,7 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid-2">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
           {filteredProjects.map((project, idx) => (
             <div key={idx} className="glass-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }}>
               
@@ -114,11 +105,11 @@ const Projects = () => {
                   <span>{project.category}</span>
                 </div>
 
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#fff', transition: 'color 0.2s' }}>
+                <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: '#fff', transition: 'color 0.2s', lineHeight: 1.3 }}>
                   {project.title}
                 </h3>
 
-                <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.7 }}>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.7, fontSize: '0.95rem' }}>
                   {project.description}
                 </p>
 
@@ -142,7 +133,7 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* Action Buttons: GitHub & Live Demo */}
+              {/* Action Buttons */}
               <div style={{ display: 'flex', gap: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
                 <a
                   href={project.github}
@@ -152,7 +143,7 @@ const Projects = () => {
                   style={{ flex: 1, justifyContent: 'center', padding: '0.6rem', fontSize: '0.9rem' }}
                 >
                   <Github size={18} />
-                  <span>Source Code</span>
+                  <span>Repository</span>
                 </a>
                 
                 <a
@@ -162,7 +153,7 @@ const Projects = () => {
                   className="btn-primary"
                   style={{ flex: 1, justifyContent: 'center', padding: '0.6rem', fontSize: '0.9rem' }}
                 >
-                  <span>Live Demo</span>
+                  <span>View Code</span>
                   <ExternalLink size={18} />
                 </a>
               </div>

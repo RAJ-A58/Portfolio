@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code2 } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -16,7 +16,7 @@ const Hero = () => {
       <div className="glow-blob" style={{ bottom: '15%', right: '10%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, transparent 70%)' }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: '850px', margin: '0 auto', textAlign: 'center' }}>
           
           {/* Tagline badge */}
           <div className="animate-fade-in" style={{
@@ -33,7 +33,7 @@ const Hero = () => {
             marginBottom: '1.5rem'
           }}>
             <Sparkles size={16} />
-            <span>Available for Full-Time Software Engineering Roles</span>
+            <span>B.Tech CSE @ VNIT Nagpur • IIT Bombay Research Intern</span>
           </div>
 
           {/* Main Title */}
@@ -43,14 +43,14 @@ const Hero = () => {
             marginBottom: '1.5rem',
             lineHeight: 1.1
           }}>
-            Building Scalable, High-Impact <br />
+            Building Intelligent Systems, <br />
             <span style={{
               background: 'var(--accent-gradient)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               display: 'inline-block'
             }}>
-              Software & Cloud Solutions
+              Compilers & Machine Learning
             </span>
           </h1>
 
@@ -59,12 +59,12 @@ const Hero = () => {
             fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
             color: 'var(--text-muted)',
             marginBottom: '2.5rem',
-            maxWidth: '650px',
+            maxWidth: '700px',
             marginLeft: 'auto',
             marginRight: 'auto',
             lineHeight: 1.7
           }}>
-            Hi, I'm <strong style={{ color: '#fff' }}>Raj</strong> — a Software Engineer dedicated to crafting modern web applications, distributed architecture, and elegant user experiences.
+            Hi, I'm <strong style={{ color: '#fff' }}>Raj Patil</strong> — a Computer Science & Engineering undergrad at Visvesvaraya National Institute of Technology (VNIT), Nagpur. Passionate about static analysis, reinforcement learning, computer vision, and scalable software architecture.
           </p>
 
           {/* Call to action buttons */}
@@ -80,7 +80,7 @@ const Hero = () => {
               <ArrowRight size={18} />
             </a>
             
-            {/* Resume link: opens in new tab or downloads */}
+            {/* Resume link */}
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-secondary">
               <Download size={18} />
               <span>Resume / CV</span>
@@ -88,38 +88,49 @@ const Hero = () => {
           </div>
 
           {/* Social Links */}
-          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
             <span style={{ color: 'var(--text-dim)', fontSize: '0.9rem', fontWeight: 500 }}>Connect with me:</span>
             <a
-              href="https://github.com"
+              href="https://github.com/RAJ-A58"
               target="_blank"
               rel="noreferrer"
-              style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }}
+              style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
               onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-              aria-label="GitHub Profile"
             >
-              <Github size={22} />
+              <Github size={20} />
+              <span style={{ fontSize: '0.9rem' }}>GitHub</span>
             </a>
             <a
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }}
+              style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
               onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-              aria-label="LinkedIn Profile"
             >
-              <Linkedin size={22} />
+              <Linkedin size={20} />
+              <span style={{ fontSize: '0.9rem' }}>LinkedIn</span>
             </a>
             <a
-              href="mailto:raj@example.com"
-              style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }}
+              href="https://leetcode.com"
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
               onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-              aria-label="Email Me"
             >
-              <Mail size={22} />
+              <Code2 size={20} />
+              <span style={{ fontSize: '0.9rem' }}>LeetCode</span>
+            </a>
+            <a
+              href="mailto:rajpatil280906@gmail.com"
+              style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+            >
+              <Mail size={20} />
+              <span style={{ fontSize: '0.9rem' }}>Email</span>
             </a>
           </div>
 

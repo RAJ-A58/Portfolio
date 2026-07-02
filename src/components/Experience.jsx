@@ -1,21 +1,23 @@
 import React from 'react';
-import { Briefcase, Calendar } from 'lucide-react';
+import { Briefcase, Calendar, MapPin } from 'lucide-react';
 
 const Experience = () => {
   const experiences = [
     {
-      role: 'Research & Software Development Intern',
-      company: 'Plato Lab, IIT Bombay',
-      duration: 'Second Year',
-      description: 'Contributed to cutting-edge research and software development projects at the Indian Institute of Technology, Bombay. Collaborated with researchers and engineers to design scalable algorithms, analyze datasets, and build modular software architectures.',
-      skills: ['Python', 'Algorithms', 'Data Analysis', 'Research & Development', 'Git']
+      role: 'Summer Research Intern',
+      company: 'IIT Bombay',
+      location: 'Mumbai, Maharashtra',
+      duration: 'May 2026 – July 2026',
+      description: 'Extended a Points-To Analysis (PTA) visualizer to handle interprocedural memory tracking for global pointers and parametric functions. Modified the PLY lexer/parser and proved system correctness by validating outputs against Andersen’s, Steensgaard’s, LFCPA, and FSPTA algorithms.',
+      skills: ['Python', 'PLY (Lex-Yacc)', 'Static Analysis (PTA)', 'Parser Design', 'Graphviz', 'Compilers']
     },
     {
-      role: 'AI & Robotics Researcher / Developer',
-      company: 'Ivlabs, VNIT Nagpur',
-      duration: 'First Year',
-      description: 'Explored core robotics algorithms, computer vision, and autonomous systems at Visvesvaraya National Institute of Technology. Engineered software modules using Python and C++, participated in technical research discussions, and developed foundational skills in systems programming.',
-      skills: ['Python', 'C++', 'Computer Vision', 'ROS', 'Machine Learning', 'Linux']
+      role: 'Summer Research Intern',
+      company: 'IvLabs, VNIT Nagpur',
+      location: 'Nagpur, Maharashtra',
+      duration: 'Summer Intern',
+      description: 'Worked on a Rocket Lander reinforcement learning project involving simulation-based control. Developed a Gymnasium-compatible environment wrapper for an open-source Rocket Lander simulator. Trained and evaluated reinforcement learning agents using Proximal Policy Optimization (PPO) with Stable-Baselines3.',
+      skills: ['Python', 'Reinforcement Learning', 'Stable-Baselines3', 'Gymnasium', 'PPO', 'Simulation Control']
     }
   ];
 
@@ -23,12 +25,12 @@ const Experience = () => {
     <section id="experience" className="section" style={{ background: 'rgba(18, 22, 31, 0.4)' }}>
       <div className="container">
         
-        <h2 className="section-title">Work Experience</h2>
+        <h2 className="section-title">Work & Research Experience</h2>
         <p className="section-subtitle">
-          My professional engineering journey and career milestones.
+          Hands-on internship experience in compiler static analysis and reinforcement learning simulation control.
         </p>
 
-        <div style={{ maxWidth: '850px', margin: '0 auto', position: 'relative' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}>
           
           {/* Vertical timeline line */}
           <div style={{
@@ -66,7 +68,13 @@ const Experience = () => {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.8rem' }}>
                     <div>
                       <h3 style={{ fontSize: '1.4rem', color: '#fff' }}>{exp.role}</h3>
-                      <h4 style={{ fontSize: '1.1rem', color: 'var(--accent-purple)', fontWeight: 500 }}>{exp.company}</h4>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', marginTop: '0.2rem' }}>
+                        <h4 style={{ fontSize: '1.1rem', color: 'var(--accent-purple)', fontWeight: 600 }}>{exp.company}</h4>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.85rem', color: 'var(--text-dim)' }}>
+                          <MapPin size={14} />
+                          {exp.location}
+                        </span>
+                      </div>
                     </div>
                     
                     <div style={{
@@ -98,7 +106,7 @@ const Experience = () => {
                           color: 'var(--accent-cyan)',
                           fontSize: '0.78rem',
                           fontWeight: 600,
-                          padding: '0.2rem 0.6rem',
+                          padding: '0.25rem 0.7rem',
                           borderRadius: '6px',
                           border: '1px solid rgba(0, 242, 254, 0.15)'
                         }}

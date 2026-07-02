@@ -22,7 +22,7 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Certifications', href: '#certifications' },
+    { name: 'Achievements', href: '#certifications' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -52,7 +52,7 @@ const Navbar = () => {
           }}>
             <Terminal size={22} />
           </div>
-          <span>Raj<span style={{ color: 'var(--accent-cyan)' }}>.dev</span></span>
+          <span>Raj Patil<span style={{ color: 'var(--accent-cyan)' }}>.dev</span></span>
         </a>
 
         {/* Desktop Navigation */}

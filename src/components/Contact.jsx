@@ -21,7 +21,7 @@ const Contact = () => {
         
         <h2 className="section-title">Get In Touch</h2>
         <p className="section-subtitle">
-          Interested in working together, discussing software architecture, or have a job opportunity? Let's connect!
+          Interested in research collaboration, discussing software engineering architecture, or job opportunities? Let's connect!
         </p>
 
         <div className="grid-2" style={{ gap: '3rem', maxWidth: '1000px', margin: '0 auto' }}>
@@ -43,7 +43,7 @@ const Contact = () => {
               </div>
               <div>
                 <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '0.2rem' }}>Email Me</h3>
-                <a href="mailto:raj@example.com" style={{ color: 'var(--text-muted)' }}>raj@example.com</a>
+                <a href="mailto:rajpatil280906@gmail.com" style={{ color: 'var(--text-muted)' }}>rajpatil280906@gmail.com</a>
               </div>
             </div>
 
@@ -62,7 +62,7 @@ const Contact = () => {
               </div>
               <div>
                 <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '0.2rem' }}>Location</h3>
-                <p style={{ color: 'var(--text-muted)' }}>Open to Remote & Relocation</p>
+                <p style={{ color: 'var(--text-muted)' }}>Nagpur, Maharashtra • Open to Relocation</p>
               </div>
             </div>
 
@@ -81,7 +81,7 @@ const Contact = () => {
               </div>
               <div>
                 <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '0.2rem' }}>Phone / WhatsApp</h3>
-                <a href="tel:+1234567890" style={{ color: 'var(--text-muted)' }}>+1 (234) 567-890</a>
+                <a href="tel:+919307704201" style={{ color: 'var(--text-muted)' }}>+91-9307704201</a>
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@ const Contact = () => {
               <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
                 <CheckCircle2 size={56} style={{ color: '#00ed64', margin: '0 auto 1rem auto' }} />
                 <h3 style={{ fontSize: '1.6rem', color: '#fff', marginBottom: '0.5rem' }}>Message Sent!</h3>
-                <p style={{ color: 'var(--text-muted)' }}>Thank you for reaching out. I will get back to you as soon as possible.</p>
+                <p style={{ color: 'var(--text-muted)' }}>Thank you for reaching out, Raj will get back to you as soon as possible.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
@@ -187,7 +187,7 @@ const Contact = () => {
 
         {/* Footer copyright */}
         <div style={{ textAlign: 'center', marginTop: '6rem', paddingTop: '2rem', borderTop: '1px solid var(--border-color)', color: 'var(--text-dim)', fontSize: '0.9rem' }}>
-          <p>© {new Date().getFullYear()} Raj. All rights reserved. Built with React & Vite.</p>
+          <p>© {new Date().getFullYear()} Raj Patil. All rights reserved. Built with React & Vite.</p>
         </div>
 
       </div>
