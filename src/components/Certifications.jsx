@@ -13,10 +13,10 @@ const Certifications = () => {
       icon: <Trophy size={28} style={{ color: '#ff9900' }} />
     },
     {
-      title: 'Competitive Programming — 350+ LeetCode Solved',
-      issuer: 'LeetCode Algorithmic Problem Solving',
-      description: 'Solved over 350 complex data structure and algorithmic challenges involving dynamic programming, graphs, trees, and constraint optimization.',
-      credentialId: 'LEETCODE-350-PLUS',
+      title: 'Competitive Programming — LeetCode 1561 & CF 1281',
+      issuer: 'LeetCode (1561 Contest Rating) • Codeforces (1281 Max)',
+      description: 'Solved over 350 algorithmic challenges on LeetCode. Achieved a Contest Rating of 1561 on LeetCode and a max rating of 1281 on Codeforces, mastering dynamic programming, graphs, trees, and constraint programming.',
+      credentialId: 'LEETCODE-1561-CF-1281',
       link: 'https://leetcode.com',
       badgeColor: '#00ed64',
       icon: <Code2 size={28} style={{ color: '#00ed64' }} />

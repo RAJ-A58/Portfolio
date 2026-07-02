@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code2 } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code2, Terminal } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -33,7 +33,7 @@ const Hero = () => {
             marginBottom: '1.5rem'
           }}>
             <Sparkles size={16} />
-            <span>B.Tech CSE @ VNIT Nagpur • IIT Bombay Research Intern</span>
+            <span>LeetCode 1561 • Codeforces 1281 • IIT Bombay Intern</span>
           </div>
 
           {/* Main Title */}
@@ -122,6 +122,17 @@ const Hero = () => {
             >
               <Code2 size={20} />
               <span style={{ fontSize: '0.9rem' }}>LeetCode</span>
+            </a>
+            <a
+              href="https://codeforces.com"
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+            >
+              <Terminal size={20} />
+              <span style={{ fontSize: '0.9rem' }}>Codeforces</span>
             </a>
             <a
               href="mailto:rajpatil280906@gmail.com"
