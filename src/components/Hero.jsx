@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code2, Terminal } from 'lucide-react';
+import Canvas3D from './Canvas3D.jsx';
 
 const Hero = () => {
   return (
@@ -11,6 +12,9 @@ const Hero = () => {
       position: 'relative',
       overflow: 'hidden'
     }}>
+      {/* Interactive 3D Particle & Neural Lattice Background */}
+      <Canvas3D />
+
       {/* Background Glow Blobs */}
       <div className="glow-blob" style={{ top: '15%', left: '10%' }} />
       <div className="glow-blob" style={{ bottom: '15%', right: '10%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, transparent 70%)' }} />

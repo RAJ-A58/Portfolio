@@ -1,5 +1,6 @@
 import React from 'react';
 import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import TiltCard from './TiltCard.jsx';
 
 const Experience = () => {
   const experiences = [
@@ -64,7 +65,7 @@ const Experience = () => {
                 </div>
 
                 {/* Card content */}
-                <div className="glass-card" style={{ flex: 1 }}>
+                <TiltCard className="glass-card" style={{ flex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.8rem' }}>
                     <div>
                       <h3 style={{ fontSize: '1.4rem', color: '#fff' }}>{exp.role}</h3>
@@ -116,7 +117,7 @@ const Experience = () => {
                     ))}
                   </div>
 
-                </div>
+                </TiltCard>
 
               </div>
             ))}

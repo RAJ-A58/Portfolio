@@ -1,5 +1,6 @@
 import React from 'react';
 import { Code, Cpu, Database, Cloud, GitBranch, Layers, BookOpen, Terminal, Shield } from 'lucide-react';
+import TiltCard from './TiltCard.jsx';
 
 const About = () => {
   const skillCategories = [
@@ -42,7 +43,7 @@ const About = () => {
         <div className="grid-2" style={{ alignItems: 'center', marginBottom: '4rem', gap: '4rem' }}>
           
           {/* Bio text */}
-          <div className="glass-card" style={{ borderLeft: '4px solid var(--border-hover)' }}>
+          <TiltCard className="glass-card" style={{ borderLeft: '4px solid var(--border-hover)' }}>
             <h3 style={{ fontSize: '1.6rem', marginBottom: '1.2rem', color: '#fff' }}>
               B.Tech in Computer Science & Engineering
             </h3>
@@ -52,46 +53,46 @@ const About = () => {
             <p style={{ color: 'var(--text-muted)', lineHeight: 1.8 }}>
               With hands-on research internship experience at prestigious institutions like <strong>IIT Bombay</strong> and <strong>IvLabs (VNIT Nagpur)</strong>, I combine rigorous theoretical foundations with practical problem-solving—proven by a <strong>1561 LeetCode Contest Rating</strong> (350+ problems solved), a <strong>1281 Codeforces Max Rating</strong>, and reaching the national finals of the Meta PyTorch OpenEnv Hackathon.
             </p>
-          </div>
+          </TiltCard>
 
           {/* Quick Stats or Highlights */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1.2rem' }}>
-            <div className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
+            <TiltCard className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
               <h4 style={{ fontSize: '2.2rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 8.52
               </h4>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>CGPA at VNIT Nagpur</p>
-            </div>
-            <div className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
+            </TiltCard>
+            <TiltCard className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
               <h4 style={{ fontSize: '2.2rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 1561
               </h4>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>LeetCode Contest Rating</p>
-            </div>
-            <div className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
+            </TiltCard>
+            <TiltCard className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
               <h4 style={{ fontSize: '2.2rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 1281
               </h4>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>Codeforces Max Rating</p>
-            </div>
-            <div className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
+            </TiltCard>
+            <TiltCard className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
               <h4 style={{ fontSize: '2.2rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 350+
               </h4>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>LeetCode Solved</p>
-            </div>
-            <div className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
+            </TiltCard>
+            <TiltCard className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
               <h4 style={{ fontSize: '2.2rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 Top 800
               </h4>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>Meta PyTorch Hackathon</p>
-            </div>
-            <div className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
+            </TiltCard>
+            <TiltCard className="glass-card" style={{ textAlign: 'center', padding: '1.2rem' }}>
               <h4 style={{ fontSize: '2.2rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 2
               </h4>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>Research Internships</p>
-            </div>
+            </TiltCard>
           </div>
 
         </div>
@@ -103,7 +104,7 @@ const About = () => {
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
           {skillCategories.map((category, idx) => (
-            <div key={idx} className="glass-card">
+            <TiltCard key={idx} className="glass-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem' }}>
                 {category.icon}
                 <h4 style={{ fontSize: '1.25rem' }}>{category.title}</h4>
@@ -136,7 +137,7 @@ const About = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Award, CheckCircle, ExternalLink, ShieldCheck, Trophy, Users, Code2, GraduationCap } from 'lucide-react';
+import TiltCard from './TiltCard.jsx';
 
 const Certifications = () => {
   const achievements = [
@@ -52,7 +53,7 @@ const Certifications = () => {
 
         <div className="grid-2">
           {achievements.map((item, idx) => (
-            <div key={idx} className="glass-card" style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+            <TiltCard key={idx} className="glass-card" style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
               
               {/* Badge Icon */}
               <div style={{
@@ -115,7 +116,7 @@ const Certifications = () => {
                 </div>
               </div>
 
-            </div>
+            </TiltCard>
           ))}
         </div>
 

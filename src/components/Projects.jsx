@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ExternalLink, Github, Layers, Star, Code2, Cpu, Compass } from 'lucide-react';
+import TiltCard from './TiltCard.jsx';
 
 const Projects = () => {
   const [filter, setFilter] = useState('All');
@@ -75,7 +76,7 @@ const Projects = () => {
         {/* Projects Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
           {filteredProjects.map((project, idx) => (
-            <div key={idx} className="glass-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }}>
+            <TiltCard key={idx} className="glass-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', height: '100%' }}>
               
               {/* Featured Badge */}
               {project.featured && (
@@ -158,7 +159,7 @@ const Projects = () => {
                 </a>
               </div>
 
-            </div>
+            </TiltCard>
           ))}
         </div>
 
