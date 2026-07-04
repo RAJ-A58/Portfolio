@@ -34,7 +34,7 @@ const Navbar = () => {
       right: 0,
       zIndex: 1000,
       transition: 'all 0.3s ease',
-      background: isScrolled ? 'rgba(10, 12, 16, 0.85)' : 'transparent',
+      background: isScrolled ? 'rgba(7, 7, 9, 0.85)' : 'transparent',
       backdropFilter: isScrolled ? 'blur(12px)' : 'none',
       borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid transparent',
       padding: isScrolled ? '0.8rem 0' : '1.5rem 0',

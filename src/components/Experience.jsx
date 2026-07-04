@@ -22,7 +22,7 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="section" style={{ background: 'rgba(18, 22, 31, 0.4)' }}>
+    <section id="experience" className="section" style={{ background: 'var(--bg-secondary)' }}>
       <div className="container">
         
         <h2 className="section-title">Work & Research Experience</h2>
@@ -53,14 +53,14 @@ const Experience = () => {
                   height: '42px',
                   borderRadius: '50%',
                   background: 'var(--bg-secondary)',
-                  border: '2px solid var(--accent-cyan)',
+                  border: '2px solid var(--border-hover)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
-                  boxShadow: '0 0 15px rgba(0, 242, 254, 0.4)'
+                  boxShadow: '0 0 15px rgba(255, 255, 255, 0.1)'
                 }}>
-                  <Briefcase size={18} style={{ color: 'var(--accent-cyan)' }} />
+                  <Briefcase size={18} style={{ color: '#fff' }} />
                 </div>
 
                 {/* Card content */}
@@ -69,7 +69,7 @@ const Experience = () => {
                     <div>
                       <h3 style={{ fontSize: '1.4rem', color: '#fff' }}>{exp.role}</h3>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', marginTop: '0.2rem' }}>
-                        <h4 style={{ fontSize: '1.1rem', color: 'var(--accent-purple)', fontWeight: 600 }}>{exp.company}</h4>
+                        <h4 style={{ fontSize: '1.1rem', color: 'var(--text-main)', fontWeight: 600 }}>{exp.company}</h4>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.85rem', color: 'var(--text-dim)' }}>
                           <MapPin size={14} />
                           {exp.location}
@@ -102,13 +102,13 @@ const Experience = () => {
                       <span
                         key={sIdx}
                         style={{
-                          background: 'rgba(0, 242, 254, 0.08)',
-                          color: 'var(--accent-cyan)',
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          color: 'var(--text-main)',
                           fontSize: '0.78rem',
                           fontWeight: 600,
                           padding: '0.25rem 0.7rem',
                           borderRadius: '6px',
-                          border: '1px solid rgba(0, 242, 254, 0.15)'
+                          border: '1px solid rgba(255, 255, 255, 0.12)'
                         }}
                       >
                         {skill}

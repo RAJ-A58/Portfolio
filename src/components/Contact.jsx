@@ -33,11 +33,11 @@ const Contact = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '12px',
-                background: 'rgba(0, 242, 254, 0.1)',
+                background: 'rgba(255, 255, 255, 0.05)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'var(--accent-cyan)'
+                color: 'var(--text-main)'
               }}>
                 <Mail size={24} />
               </div>
@@ -52,11 +52,11 @@ const Contact = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '12px',
-                background: 'rgba(79, 172, 254, 0.1)',
+                background: 'rgba(255, 255, 255, 0.05)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'var(--accent-purple)'
+                color: 'var(--text-main)'
               }}>
                 <MapPin size={24} />
               </div>
@@ -71,11 +71,11 @@ const Contact = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '12px',
-                background: 'rgba(168, 85, 247, 0.1)',
+                background: 'rgba(255, 255, 255, 0.05)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'var(--accent-violet)'
+                color: 'var(--text-main)'
               }}>
                 <Phone size={24} />
               </div>

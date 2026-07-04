@@ -42,7 +42,7 @@ const Certifications = () => {
   ];
 
   return (
-    <section id="certifications" className="section" style={{ background: 'rgba(18, 22, 31, 0.4)' }}>
+    <section id="certifications" className="section" style={{ background: 'var(--bg-secondary)' }}>
       <div className="container">
         
         <h2 className="section-title">Honors, Awards & Achievements</h2>

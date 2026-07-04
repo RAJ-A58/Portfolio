@@ -64,7 +64,7 @@ const Projects = () => {
                 background: filter === cat ? 'var(--accent-gradient)' : 'rgba(255, 255, 255, 0.05)',
                 color: filter === cat ? '#000' : 'var(--text-muted)',
                 border: filter === cat ? '1px solid transparent' : '1px solid var(--border-color)',
-                boxShadow: filter === cat ? '0 4px 15px rgba(0, 242, 254, 0.3)' : 'none'
+                boxShadow: filter === cat ? '0 4px 15px rgba(255, 255, 255, 0.2)' : 'none'
               }}
             >
               {cat}
@@ -92,7 +92,7 @@ const Projects = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.3rem',
-                  boxShadow: '0 4px 12px rgba(0, 242, 254, 0.4)'
+                  boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)'
                 }}>
                   <Star size={12} fill="#000" />
                   <span>Featured</span>
@@ -100,7 +100,7 @@ const Projects = () => {
               )}
 
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-purple)', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.6rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.6rem' }}>
                   <Layers size={16} />
                   <span>{project.category}</span>
                 </div>

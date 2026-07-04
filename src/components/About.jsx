@@ -5,27 +5,27 @@ const About = () => {
   const skillCategories = [
     {
       title: 'Programming Languages',
-      icon: <Code size={24} style={{ color: 'var(--accent-cyan)' }} />,
+      icon: <Code size={24} style={{ color: '#fff' }} />,
       skills: ['Python', 'C++', 'C', 'JavaScript (ES6+)', 'Algorithms', 'Data Structures']
     },
     {
       title: 'Compilers & Static Analysis',
-      icon: <Terminal size={24} style={{ color: 'var(--accent-purple)' }} />,
+      icon: <Terminal size={24} style={{ color: '#fff' }} />,
       skills: ['PLY (Python Lex-Yacc)', 'Parser Design', 'Static Analysis (PTA)', 'Graphviz', 'Andersen / Steensgaard Algorithms', 'LFCPA / FSPTA']
     },
     {
       title: 'Machine Learning, RL & CV',
-      icon: <Cpu size={24} style={{ color: 'var(--accent-violet)' }} />,
+      icon: <Cpu size={24} style={{ color: '#fff' }} />,
       skills: ['Stable-Baselines3', 'Proximal Policy Optimization (PPO)', 'Gymnasium', 'OpenCV', 'MediaPipe Face Mesh', 'TensorFlow', 'NumPy', 'Head Pose Estimation']
     },
     {
       title: 'Optimization & Developer Tools',
-      icon: <Layers size={24} style={{ color: '#00ed64' }} />,
+      icon: <Layers size={24} style={{ color: '#fff' }} />,
       skills: ['Google OR-Tools (CP-SAT)', 'Constraint Programming', 'Operations Research', 'Web Extensions API (Manifest V3)', 'Chrome DevTools', 'Git & GitHub']
     },
     {
       title: 'Core Computer Science',
-      icon: <BookOpen size={24} style={{ color: '#ff9900' }} />,
+      icon: <BookOpen size={24} style={{ color: '#fff' }} />,
       skills: ['System Design', 'Database Management Systems (DBMS)', 'Operating Systems (OS)', 'Computer Networks (CN)']
     }
   ];
@@ -42,7 +42,7 @@ const About = () => {
         <div className="grid-2" style={{ alignItems: 'center', marginBottom: '4rem', gap: '4rem' }}>
           
           {/* Bio text */}
-          <div className="glass-card" style={{ borderLeft: '4px solid var(--accent-cyan)' }}>
+          <div className="glass-card" style={{ borderLeft: '4px solid var(--border-hover)' }}>
             <h3 style={{ fontSize: '1.6rem', marginBottom: '1.2rem', color: '#fff' }}>
               B.Tech in Computer Science & Engineering
             </h3>
@@ -124,8 +124,8 @@ const About = () => {
                       transition: 'all 0.2s ease'
                     }}
                     onMouseOver={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--accent-cyan)';
-                      e.currentTarget.style.background = 'rgba(0, 242, 254, 0.08)';
+                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
                     }}
                     onMouseOut={(e) => {
                       e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
