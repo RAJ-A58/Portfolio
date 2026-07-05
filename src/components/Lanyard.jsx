@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Award, Sparkles, Code2, ShieldCheck, QrCode } from 'lucide-react';
+import { Award, Sparkles, Code2, ShieldCheck, Terminal, Atom } from 'lucide-react';
 import './Lanyard.css';
 
 const Lanyard = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const [rotate, setRotate] = useState({ x: 0, y: 0, z: 0 });
   const cardRef = useRef(null);
   const dragStartRef = useRef({ x: 0, y: 0 });
 
@@ -14,8 +14,8 @@ const Lanyard = () => {
     if (!isDragging) {
       const timer = setTimeout(() => {
         setPosition({ x: 0, y: 0 });
-        setRotate({ x: 0, y: 0 });
-      }, 50);
+        setRotate({ x: 0, y: 0, z: 0 });
+      }, 30);
       return () => clearTimeout(timer);
     }
   }, [isDragging]);
@@ -34,11 +34,16 @@ const Lanyard = () => {
       const newY = e.clientY - dragStartRef.current.y;
       
       // Limit drag distance
-      const boundedX = Math.max(-120, Math.min(120, newX));
-      const boundedY = Math.max(-60, Math.min(100, newY));
+      const boundedX = Math.max(-140, Math.min(140, newX));
+      const boundedY = Math.max(-60, Math.min(120, newY));
       
       setPosition({ x: boundedX, y: boundedY });
-      setRotate({ x: -boundedY * 0.3, y: boundedX * 0.4 });
+      // Realistic 3D swivel & twist during drag
+      setRotate({ 
+        x: -boundedY * 0.35, 
+        y: boundedX * 0.45,
+        z: boundedX * 0.15 
+      });
     } else if (cardRef.current) {
       // 3D tilt on hover when not dragging
       const rect = cardRef.current.getBoundingClientRect();
@@ -46,9 +51,9 @@ const Lanyard = () => {
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -15;
-      const rotateY = ((x - centerX) / centerX) * 15;
-      setRotate({ x: rotateX, y: rotateY });
+      const rotateX = ((y - centerY) / centerY) * -18;
+      const rotateY = ((x - centerX) / centerX) * 18;
+      setRotate({ x: rotateX, y: rotateY, z: rotateY * 0.2 });
     }
   };
 
@@ -58,7 +63,7 @@ const Lanyard = () => {
 
   const handleMouseLeave = () => {
     if (!isDragging) {
-      setRotate({ x: 0, y: 0 });
+      setRotate({ x: 0, y: 0, z: 0 });
     }
     setIsDragging(false);
   };
@@ -78,11 +83,15 @@ const Lanyard = () => {
     const touch = e.touches[0];
     const newX = touch.clientX - dragStartRef.current.x;
     const newY = touch.clientY - dragStartRef.current.y;
-    const boundedX = Math.max(-100, Math.min(100, newX));
-    const boundedY = Math.max(-50, Math.min(80, newY));
+    const boundedX = Math.max(-120, Math.min(120, newX));
+    const boundedY = Math.max(-50, Math.min(100, newY));
     setPosition({ x: boundedX, y: boundedY });
-    setRotate({ x: -boundedY * 0.3, y: boundedX * 0.4 });
+    setRotate({ x: -boundedY * 0.35, y: boundedX * 0.45, z: boundedX * 0.15 });
   };
+
+  // Calculate strap angle and stretch based on card position
+  const strapAngle = Math.atan2(position.x, 220 + position.y) * (180 / Math.PI);
+  const strapStretch = Math.sqrt(Math.pow(position.x, 2) + Math.pow(220 + position.y, 2)) / 220;
 
   return (
     <div 
@@ -93,83 +102,73 @@ const Lanyard = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseUp}
     >
-      {/* Hanging Strap / String */}
-      <div className="lanyard-strap-wrapper">
-        <svg className="lanyard-strap-svg" viewBox="0 0 200 160">
-          {/* Left string */}
-          <line 
-            x1="100" y1="0" 
-            x2={100 + position.x * 0.7 - 15} y2={140 + position.y} 
-            stroke="rgba(255, 255, 255, 0.4)" 
-            strokeWidth="3" 
-            strokeDasharray="4 2"
-          />
-          {/* Right string */}
-          <line 
-            x1="100" y1="0" 
-            x2={100 + position.x * 0.7 + 15} y2={140 + position.y} 
-            stroke="rgba(255, 255, 255, 0.4)" 
-            strokeWidth="3" 
-            strokeDasharray="4 2"
-          />
-          {/* Metallic Clip */}
-          <circle 
-            cx={100 + position.x * 0.7} 
-            cy={140 + position.y} 
-            r="8" 
-            fill="#e2e8f0" 
-            stroke="#64748b" 
-            strokeWidth="2" 
-          />
-        </svg>
+      {/* Thick Fabric Lanyard Strap with Printed White Logos (Like React Bits) */}
+      <div 
+        className="lanyard-fabric-strap"
+        style={{
+          transform: `rotate(${strapAngle * 0.6}deg) scaleY(${strapStretch})`,
+          transformOrigin: 'top center'
+        }}
+      >
+        <div className="lanyard-strap-logo"><Atom size={16} /></div>
+        <div className="lanyard-strap-logo"><Code2 size={16} /></div>
+        <div className="lanyard-strap-logo"><Terminal size={16} /></div>
+        <div className="lanyard-strap-logo"><Atom size={16} /></div>
+
+        {/* Metal Swivel Clasp / Lobster Hook at the bottom of the band */}
+        <div className="lanyard-metal-clasp">
+          <div className="lanyard-clasp-ring" />
+          <div className="lanyard-clasp-hook" />
+        </div>
       </div>
 
-      {/* Draggable VIP Conference ID Card */}
+      {/* Realistic 3D Conference Tag Card (Like Screenshot 2) */}
       <div 
         ref={cardRef}
         className={`lanyard-card ${isDragging ? 'dragging' : ''}`}
         style={{
-          transform: `translate3d(${position.x}px, ${position.y}px, 0) perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+          transform: `translate3d(${position.x}px, ${position.y}px, 0) perspective(1200px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) rotateZ(${rotate.z}deg)`,
           cursor: isDragging ? 'grabbing' : 'grab'
         }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
       >
-        {/* Card Header Hole & Metal Ring */}
-        <div className="lanyard-clip-hole" style={{ marginBottom: '1.5rem' }}>
-          <div className="lanyard-metal-ring" />
+        {/* Top Punch Hole where the Clasp Connects */}
+        <div className="lanyard-card-hole">
+          <div className="lanyard-hole-inner" />
         </div>
 
-        {/* Center Portrait with Japanese Luxury Silver Border */}
-        <div className="lanyard-photo-wrapper" style={{ marginTop: '1rem', width: '130px', height: '130px' }}>
+        {/* Center Photo with Clean White/Silver Styling */}
+        <div className="lanyard-photo-wrapper">
           <img 
             src="https://github.com/RAJ-A58.png" 
             alt="Raj Patil" 
             className="lanyard-photo"
             draggable="false"
           />
-          <div className="lanyard-photo-ring" />
+          <div className="lanyard-photo-border" />
         </div>
 
         {/* Name */}
-        <div className="lanyard-info" style={{ marginBottom: '1.8rem', marginTop: '0.5rem' }}>
-          <h3 className="lanyard-name" style={{ fontSize: '1.75rem', letterSpacing: '-0.03em' }}>RAJ PATIL</h3>
+        <div className="lanyard-info">
+          <h3 className="lanyard-name">RAJ PATIL</h3>
         </div>
 
-        {/* Competitive Programming Stats Bar */}
-        <div className="lanyard-stats-bar" style={{ width: '100%', padding: '0.8rem 1rem', background: 'rgba(0,0,0,0.5)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.15)' }}>
+        {/* Competitive Programming Scores Pill Box */}
+        <div className="lanyard-stats-bar">
           <div className="lanyard-stat-item">
-            <span className="lanyard-stat-label" style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginBottom: '0.2rem' }}>LeetCode</span>
-            <span className="lanyard-stat-val" style={{ fontSize: '1.35rem', fontWeight: 800 }}>1561</span>
+            <span className="lanyard-stat-label">LEETCODE</span>
+            <span className="lanyard-stat-val">1561</span>
           </div>
-          <div className="lanyard-stat-divider" style={{ height: '36px' }} />
+          <div className="lanyard-stat-divider" />
           <div className="lanyard-stat-item">
-            <span className="lanyard-stat-label" style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginBottom: '0.2rem' }}>Codeforces</span>
-            <span className="lanyard-stat-val" style={{ fontSize: '1.35rem', fontWeight: 800 }}>1281</span>
+            <span className="lanyard-stat-label">CODEFORCES</span>
+            <span className="lanyard-stat-val">1281</span>
           </div>
         </div>
 
-        {/* Shimmering Glare Overlay */}
+        {/* Realistic Paper Texture & Lighting Glare Overlay */}
+        <div className="lanyard-paper-texture" />
         <div className="lanyard-glare" />
       </div>
     </div>
