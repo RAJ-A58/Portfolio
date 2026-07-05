@@ -136,18 +136,12 @@ const Lanyard = () => {
         onTouchStart={handleTouchStart}
       >
         {/* Card Header Hole & Metal Ring */}
-        <div className="lanyard-clip-hole">
+        <div className="lanyard-clip-hole" style={{ marginBottom: '1.5rem' }}>
           <div className="lanyard-metal-ring" />
         </div>
 
-        {/* Top Conference Banner */}
-        <div className="lanyard-header">
-          <span className="lanyard-badge-pill">VIP KEYNOTE PASS 2026</span>
-          <p className="lanyard-org-text">IIT BOMBAY × VNIT NAGPUR</p>
-        </div>
-
         {/* Center Portrait with Japanese Luxury Silver Border */}
-        <div className="lanyard-photo-wrapper">
+        <div className="lanyard-photo-wrapper" style={{ marginTop: '1rem', width: '130px', height: '130px' }}>
           <img 
             src="https://github.com/RAJ-A58.png" 
             alt="Raj Patil" 
@@ -157,35 +151,21 @@ const Lanyard = () => {
           <div className="lanyard-photo-ring" />
         </div>
 
-        {/* Name & Role */}
-        <div className="lanyard-info">
-          <h3 className="lanyard-name">RAJ PATIL</h3>
-          <p className="lanyard-role">Systems Software Engineer & Researcher</p>
+        {/* Name */}
+        <div className="lanyard-info" style={{ marginBottom: '1.8rem', marginTop: '0.5rem' }}>
+          <h3 className="lanyard-name" style={{ fontSize: '1.75rem', letterSpacing: '-0.03em' }}>RAJ PATIL</h3>
         </div>
 
         {/* Competitive Programming Stats Bar */}
-        <div className="lanyard-stats-bar">
+        <div className="lanyard-stats-bar" style={{ width: '100%', padding: '0.8rem 1rem', background: 'rgba(0,0,0,0.5)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.15)' }}>
           <div className="lanyard-stat-item">
-            <span className="lanyard-stat-label">LeetCode</span>
-            <span className="lanyard-stat-val">1561</span>
+            <span className="lanyard-stat-label" style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginBottom: '0.2rem' }}>LeetCode</span>
+            <span className="lanyard-stat-val" style={{ fontSize: '1.35rem', fontWeight: 800 }}>1561</span>
           </div>
-          <div className="lanyard-stat-divider" />
+          <div className="lanyard-stat-divider" style={{ height: '36px' }} />
           <div className="lanyard-stat-item">
-            <span className="lanyard-stat-label">Codeforces</span>
-            <span className="lanyard-stat-val">1281</span>
-          </div>
-        </div>
-
-        {/* Barcode & Security Chip Footer */}
-        <div className="lanyard-footer">
-          <div className="lanyard-chip">
-            <ShieldCheck size={14} className="text-cyan-400" />
-            <span>ID: #RP-2026-AI</span>
-          </div>
-          <div className="lanyard-barcode">
-            <span style={{ fontFamily: 'monospace', letterSpacing: '2px', fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
-              ||| | |||| || | || ||||
-            </span>
+            <span className="lanyard-stat-label" style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginBottom: '0.2rem' }}>Codeforces</span>
+            <span className="lanyard-stat-val" style={{ fontSize: '1.35rem', fontWeight: 800 }}>1281</span>
           </div>
         </div>
 
