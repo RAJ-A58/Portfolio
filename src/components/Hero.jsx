@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code2, Terminal } from 'lucide-react';
 import Canvas3D from './Canvas3D.jsx';
+import Dither from './Dither.jsx';
 import Lanyard from './Lanyard.jsx';
 
 const Hero = () => {
@@ -13,8 +14,19 @@ const Hero = () => {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Interactive 3D Particle & Neural Lattice Background */}
-      <Canvas3D />
+      {/* Interactive React Bits Dithered Wave Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <Dither
+          waveColor={[0.45, 0.48, 0.55]}
+          disableAnimation={false}
+          enableMouseInteraction={true}
+          mouseRadius={0.35}
+          colorNum={4}
+          waveAmplitude={0.3}
+          waveFrequency={3}
+          waveSpeed={0.05}
+        />
+      </div>
 
       {/* Background Glow Blobs */}
       <div className="glow-blob" style={{ top: '15%', left: '10%' }} />
