@@ -1,178 +1,334 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Award, Sparkles, Code2, ShieldCheck, Terminal, Atom } from 'lucide-react';
+/* eslint-disable react/no-unknown-property */
+'use client';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Canvas, extend, useFrame } from '@react-three/fiber';
+import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
+import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
+import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
+
+import cardGLB from './card.glb';
+import lanyard from './lanyard.png';
+import rajAvatar from './raj-avatar.png';
+
+import * as THREE from 'three';
 import './Lanyard.css';
 
-const Lanyard = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [rotate, setRotate] = useState({ x: 0, y: 0, z: 0 });
-  const cardRef = useRef(null);
-  const dragStartRef = useRef({ x: 0, y: 0 });
+extend({ MeshLineGeometry, MeshLineMaterial });
 
-  // Spring back to center when released
+const BLANK_PIXEL =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.755 };
+const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
+
+export default function Lanyard({
+  position = [0, 0, 30],
+  gravity = [0, -40, 0],
+  fov = 20,
+  transparent = true,
+  frontImage = null,
+  backImage = null,
+  imageFit = 'cover',
+  lanyardImage = null,
+  lanyardWidth = 1
+}) {
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
+
   useEffect(() => {
-    if (!isDragging) {
-      const timer = setTimeout(() => {
-        setPosition({ x: 0, y: 0 });
-        setRotate({ x: 0, y: 0, z: 0 });
-      }, 30);
-      return () => clearTimeout(timer);
-    }
-  }, [isDragging]);
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    dragStartRef.current = {
-      x: e.clientX - position.x,
-      y: e.clientY - position.y
-    };
-  };
-
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      const newX = e.clientX - dragStartRef.current.x;
-      const newY = e.clientY - dragStartRef.current.y;
-      
-      // Limit drag distance
-      const boundedX = Math.max(-140, Math.min(140, newX));
-      const boundedY = Math.max(-60, Math.min(120, newY));
-      
-      setPosition({ x: boundedX, y: boundedY });
-      // Realistic 3D swivel & twist during drag
-      setRotate({ 
-        x: -boundedY * 0.35, 
-        y: boundedX * 0.45,
-        z: boundedX * 0.15 
-      });
-    } else if (cardRef.current) {
-      // 3D tilt on hover when not dragging
-      const rect = cardRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -18;
-      const rotateY = ((x - centerX) / centerX) * 18;
-      setRotate({ x: rotateX, y: rotateY, z: rotateY * 0.2 });
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseLeave = () => {
-    if (!isDragging) {
-      setRotate({ x: 0, y: 0, z: 0 });
-    }
-    setIsDragging(false);
-  };
-
-  // Touch support for mobile devices
-  const handleTouchStart = (e) => {
-    const touch = e.touches[0];
-    setIsDragging(true);
-    dragStartRef.current = {
-      x: touch.clientX - position.x,
-      y: touch.clientY - position.y
-    };
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isDragging) return;
-    const touch = e.touches[0];
-    const newX = touch.clientX - dragStartRef.current.x;
-    const newY = touch.clientY - dragStartRef.current.y;
-    const boundedX = Math.max(-120, Math.min(120, newX));
-    const boundedY = Math.max(-50, Math.min(100, newY));
-    setPosition({ x: boundedX, y: boundedY });
-    setRotate({ x: -boundedY * 0.35, y: boundedX * 0.45, z: boundedX * 0.15 });
-  };
-
-  // Calculate strap angle and stretch based on card position
-  const strapAngle = Math.atan2(position.x, 220 + position.y) * (180 / Math.PI);
-  const strapStretch = Math.sqrt(Math.pow(position.x, 2) + Math.pow(220 + position.y, 2)) / 220;
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
-    <div 
-      className="lanyard-container"
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleMouseUp}
-    >
-      {/* Thick Fabric Lanyard Strap with Printed White Logos (Like React Bits) */}
-      <div 
-        className="lanyard-fabric-strap"
-        style={{
-          transform: `rotate(${strapAngle * 0.6}deg) scaleY(${strapStretch})`,
-          transformOrigin: 'top center'
-        }}
+    <div className="lanyard-wrapper">
+      <Canvas
+        camera={{ position: position, fov: fov }}
+        dpr={[1, isMobile ? 1.5 : 2]}
+        gl={{ alpha: transparent }}
+        onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
-        <div className="lanyard-strap-logo"><Atom size={16} /></div>
-        <div className="lanyard-strap-logo"><Code2 size={16} /></div>
-        <div className="lanyard-strap-logo"><Terminal size={16} /></div>
-        <div className="lanyard-strap-logo"><Atom size={16} /></div>
-
-        {/* Metal Swivel Clasp / Lobster Hook at the bottom of the band */}
-        <div className="lanyard-metal-clasp">
-          <div className="lanyard-clasp-ring" />
-          <div className="lanyard-clasp-hook" />
-        </div>
-      </div>
-
-      {/* Realistic 3D Conference Tag Card (Like Screenshot 2) */}
-      <div 
-        ref={cardRef}
-        className={`lanyard-card ${isDragging ? 'dragging' : ''}`}
-        style={{
-          transform: `translate3d(${position.x}px, ${position.y}px, 0) perspective(1200px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) rotateZ(${rotate.z}deg)`,
-          cursor: isDragging ? 'grabbing' : 'grab'
-        }}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
-      >
-        {/* Top Punch Hole where the Clasp Connects */}
-        <div className="lanyard-card-hole">
-          <div className="lanyard-hole-inner" />
-        </div>
-
-        {/* Center Photo with Clean White/Silver Styling */}
-        <div className="lanyard-photo-wrapper">
-          <img 
-            src="https://github.com/RAJ-A58.png" 
-            alt="Raj Patil" 
-            className="lanyard-photo"
-            draggable="false"
+        <ambientLight intensity={Math.PI} />
+        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+          <Band
+            isMobile={isMobile}
+            frontImage={frontImage}
+            backImage={backImage}
+            imageFit={imageFit}
+            lanyardImage={lanyardImage}
+            lanyardWidth={lanyardWidth}
           />
-          <div className="lanyard-photo-border" />
-        </div>
-
-        {/* Name */}
-        <div className="lanyard-info">
-          <h3 className="lanyard-name">RAJ PATIL</h3>
-        </div>
-
-        {/* Competitive Programming Scores Pill Box */}
-        <div className="lanyard-stats-bar">
-          <div className="lanyard-stat-item">
-            <span className="lanyard-stat-label">LEETCODE</span>
-            <span className="lanyard-stat-val">1561</span>
-          </div>
-          <div className="lanyard-stat-divider" />
-          <div className="lanyard-stat-item">
-            <span className="lanyard-stat-label">CODEFORCES</span>
-            <span className="lanyard-stat-val">1281</span>
-          </div>
-        </div>
-
-        {/* Realistic Paper Texture & Lighting Glare Overlay */}
-        <div className="lanyard-paper-texture" />
-        <div className="lanyard-glare" />
-      </div>
+        </Physics>
+        <Environment blur={0.75}>
+          <Lightformer
+            intensity={2}
+            color="white"
+            position={[0, -1, 5]}
+            rotation={[0, 0, Math.PI / 3]}
+            scale={[100, 0.1, 1]}
+          />
+          <Lightformer
+            intensity={3}
+            color="white"
+            position={[-1, -1, 1]}
+            rotation={[0, 0, Math.PI / 3]}
+            scale={[100, 0.1, 1]}
+          />
+          <Lightformer
+            intensity={3}
+            color="white"
+            position={[1, 1, 1]}
+            rotation={[0, 0, Math.PI / 3]}
+            scale={[100, 0.1, 1]}
+          />
+          <Lightformer
+            intensity={10}
+            color="white"
+            position={[-10, 0, 14]}
+            rotation={[0, Math.PI / 2, Math.PI / 3]}
+            scale={[100, 10, 1]}
+          />
+        </Environment>
+      </Canvas>
     </div>
   );
-};
+}
 
-export default Lanyard;
+function Band({
+  maxSpeed = 50,
+  minSpeed = 0,
+  isMobile = false,
+  frontImage = null,
+  backImage = null,
+  imageFit = 'cover',
+  lanyardImage = null,
+  lanyardWidth = 1
+}) {
+  const band = useRef(),
+    fixed = useRef(),
+    j1 = useRef(),
+    j2 = useRef(),
+    j3 = useRef(),
+    card = useRef();
+  const vec = new THREE.Vector3(),
+    ang = new THREE.Vector3(),
+    rot = new THREE.Vector3(),
+    dir = new THREE.Vector3();
+  const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
+  const { nodes, materials } = useGLTF(cardGLB);
+  const texture = useTexture(lanyardImage || lanyard);
+  const frontTex = useTexture(frontImage || BLANK_PIXEL);
+  const backTex = useTexture(backImage || BLANK_PIXEL);
+  const avatarTex = useTexture(rajAvatar);
+
+  const cardMap = useMemo(() => {
+    const baseMap = materials.base.map;
+    const baseImg = baseMap.image;
+    if (!baseImg) return baseMap;
+
+    const W = baseImg.width;
+    const H = baseImg.height;
+    const canvas = document.createElement('canvas');
+    canvas.width = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return baseMap;
+    ctx.drawImage(baseImg, 0, 0, W, H);
+
+    // --- BAKE CUSTOM RAJ PATIL BADGE ONTO FRONT FACE (FRONT_UV_RECT) ---
+    const fx = FRONT_UV_RECT.x * W;
+    const fy = FRONT_UV_RECT.y * H;
+    const fw = FRONT_UV_RECT.w * W;
+    const fh = FRONT_UV_RECT.h * H;
+
+    // Clean white conference card background
+    ctx.fillStyle = '#f8fafc';
+    ctx.fillRect(fx, fy, fw, fh);
+
+    // Draw Raj's avatar photo (circular centered)
+    if (avatarTex && avatarTex.image) {
+      const imgW = fw * 0.44;
+      const imgH = imgW;
+      const imgX = fx + (fw - imgW) / 2;
+      const imgY = fy + fh * 0.12;
+      
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(imgX + imgW / 2, imgY + imgH / 2, imgW / 2, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.drawImage(avatarTex.image, imgX, imgY, imgW, imgH);
+      ctx.restore();
+
+      // Dashed border around photo
+      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 6;
+      ctx.setLineDash([12, 8]);
+      ctx.beginPath();
+      ctx.arc(imgX + imgW / 2, imgY + imgH / 2, imgW / 2 + 4, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Draw Name: RAJ PATIL
+    ctx.fillStyle = '#0f172a';
+    ctx.font = '900 74px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('RAJ PATIL', fx + fw / 2, fy + fh * 0.58);
+
+    // Draw Subtitle
+    ctx.fillStyle = '#475569';
+    ctx.font = '600 32px sans-serif';
+    ctx.fillText('Systems Software Engineer', fx + fw / 2, fy + fh * 0.65);
+
+    // Draw Obsidian Stat Box
+    const boxW = fw * 0.86;
+    const boxH = fh * 0.18;
+    const boxX = fx + (fw - boxW) / 2;
+    const boxY = fy + fh * 0.72;
+    
+    ctx.fillStyle = '#0f172a';
+    ctx.beginPath();
+    if (ctx.roundRect) {
+      ctx.roundRect(boxX, boxY, boxW, boxH, 24);
+    } else {
+      ctx.fillRect(boxX, boxY, boxW, boxH);
+    }
+    ctx.fill();
+
+    // Stats Text
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillText('LEETCODE', fx + fw * 0.29, boxY + boxH * 0.36);
+    ctx.fillText('CODEFORCES', fx + fw * 0.71, boxY + boxH * 0.36);
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = '900 46px sans-serif';
+    ctx.fillText('1561', fx + fw * 0.29, boxY + boxH * 0.80);
+    ctx.fillText('1281', fx + fw * 0.71, boxY + boxH * 0.80);
+
+    // Vertical Divider Line between stats
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(fx + fw * 0.5, boxY + boxH * 0.2);
+    ctx.lineTo(fx + fw * 0.5, boxY + boxH * 0.8);
+    ctx.stroke();
+    // -------------------------------------------------------------------
+
+    const composite = new THREE.CanvasTexture(canvas);
+    composite.colorSpace = THREE.SRGBColorSpace;
+    composite.flipY = baseMap.flipY;
+    composite.anisotropy = 16;
+    composite.needsUpdate = true;
+    return composite;
+  }, [frontImage, backImage, imageFit, frontTex, backTex, avatarTex, materials.base.map]);
+
+  const [curve] = useState(
+    () =>
+      new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
+  );
+  const [dragged, drag] = useState(false);
+  const [hovered, hover] = useState(false);
+
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
+  useSphericalJoint(j3, card, [
+    [0, 0, 0],
+    [0, 1.5, 0]
+  ]);
+
+  useEffect(() => {
+    if (hovered) {
+      document.body.style.cursor = dragged ? 'grabbing' : 'grab';
+      return () => void (document.body.style.cursor = 'auto');
+    }
+  }, [hovered, dragged]);
+
+  useFrame((state, delta) => {
+    if (dragged) {
+      vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
+      dir.copy(vec).sub(state.camera.position).normalize();
+      vec.add(dir.multiplyScalar(state.camera.position.length()));
+      [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
+      card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
+    }
+    if (fixed.current) {
+      [j1, j2].forEach(ref => {
+        if (!ref.current.lerped) ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
+        const clampedDistance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())));
+        ref.current.lerped.lerp(
+          ref.current.translation(),
+          delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed))
+        );
+      });
+      curve.points[0].copy(j3.current.translation());
+      curve.points[1].copy(j2.current.lerped);
+      curve.points[2].copy(j1.current.lerped);
+      curve.points[3].copy(fixed.current.translation());
+      band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+      ang.copy(card.current.angvel());
+      rot.copy(card.current.rotation());
+      card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
+    }
+  });
+
+  curve.curveType = 'chordal';
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+
+  return (
+    <>
+      <group position={[0, 4, 0]}>
+        <RigidBody ref={fixed} {...segmentProps} type="fixed" />
+        <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
+          <BallCollider args={[0.1]} />
+        </RigidBody>
+        <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}>
+          <BallCollider args={[0.1]} />
+        </RigidBody>
+        <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
+          <BallCollider args={[0.1]} />
+        </RigidBody>
+        <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
+          <CuboidCollider args={[0.8, 1.125, 0.01]} />
+          <group
+            scale={2.25}
+            position={[0, -1.2, -0.05]}
+            onPointerOver={() => hover(true)}
+            onPointerOut={() => hover(false)}
+            onPointerUp={e => (e.target.releasePointerCapture(e.pointerId), drag(false))}
+            onPointerDown={e => (
+              e.target.setPointerCapture(e.pointerId),
+              drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
+            )}
+          >
+            <mesh geometry={nodes.card.geometry}>
+              <meshPhysicalMaterial
+                map={cardMap}
+                map-anisotropy={16}
+                clearcoat={isMobile ? 0 : 1}
+                clearcoatRoughness={0.15}
+                roughness={0.9}
+                metalness={0.8}
+              />
+            </mesh>
+            <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
+            <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+          </group>
+        </RigidBody>
+      </group>
+      <mesh ref={band}>
+        <meshLineGeometry />
+        <meshLineMaterial
+          color="white"
+          depthTest={false}
+          resolution={isMobile ? [1000, 2000] : [1000, 1000]}
+          useMap
+          map={texture}
+          repeat={[-4, 1]}
+          lineWidth={lanyardWidth}
+        />
+      </mesh>
+    </>
+  );
+}
