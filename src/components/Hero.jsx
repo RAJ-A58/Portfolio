@@ -15,14 +15,14 @@ const Hero = () => {
       overflow: 'hidden'
     }}>
       {/* Interactive React Bits Dithered Wave Background */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'auto' }}>
         <Dither
-          waveColor={[0.45, 0.48, 0.55]}
+          waveColor={[0.55, 0.65, 0.85]}
           disableAnimation={false}
           enableMouseInteraction={true}
-          mouseRadius={0.35}
+          mouseRadius={0.4}
           colorNum={4}
-          waveAmplitude={0.3}
+          waveAmplitude={0.35}
           waveFrequency={3}
           waveSpeed={0.05}
         />
