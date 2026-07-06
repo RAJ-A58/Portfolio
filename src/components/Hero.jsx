@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code2, Terminal } from 'lucide-react';
-import Canvas3D from './Canvas3D.jsx';
 import Dither from './Dither.jsx';
 import Lanyard from './Lanyard.jsx';
 
