@@ -145,12 +145,12 @@ function Band({
     ctx.fillStyle = '#f8fafc';
     ctx.fillRect(fx, fy, fw, fh);
 
-    // Draw Raj's avatar photo (circular centered)
+    // Draw Raj's avatar photo (circular centered, larger prominent size)
     if (avatarTex && avatarTex.image) {
-      const imgW = fw * 0.44;
+      const imgW = fw * 0.54;
       const imgH = imgW;
       const imgX = fx + (fw - imgW) / 2;
-      const imgY = fy + fh * 0.12;
+      const imgY = fy + fh * 0.08;
       
       ctx.save();
       ctx.beginPath();
@@ -161,8 +161,8 @@ function Band({
 
       // Dashed border around photo
       ctx.strokeStyle = '#0f172a';
-      ctx.lineWidth = 6;
-      ctx.setLineDash([12, 8]);
+      ctx.lineWidth = 7;
+      ctx.setLineDash([14, 8]);
       ctx.beginPath();
       ctx.arc(imgX + imgW / 2, imgY + imgH / 2, imgW / 2 + 4, 0, Math.PI * 2);
       ctx.stroke();
@@ -171,20 +171,20 @@ function Band({
 
     // Draw Name: RAJ PATIL
     ctx.fillStyle = '#0f172a';
-    ctx.font = '900 74px sans-serif';
+    ctx.font = '900 84px sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('RAJ PATIL', fx + fw / 2, fy + fh * 0.58);
 
     // Draw Subtitle
     ctx.fillStyle = '#475569';
-    ctx.font = '600 32px sans-serif';
+    ctx.font = '600 34px sans-serif';
     ctx.fillText('Systems Software Engineer', fx + fw / 2, fy + fh * 0.65);
 
     // Draw Obsidian Stat Box
-    const boxW = fw * 0.86;
+    const boxW = fw * 0.88;
     const boxH = fh * 0.18;
     const boxX = fx + (fw - boxW) / 2;
-    const boxY = fy + fh * 0.72;
+    const boxY = fy + fh * 0.73;
     
     ctx.fillStyle = '#0f172a';
     ctx.beginPath();
@@ -197,12 +197,12 @@ function Band({
 
     // Stats Text
     ctx.fillStyle = '#94a3b8';
-    ctx.font = 'bold 24px sans-serif';
+    ctx.font = 'bold 26px sans-serif';
     ctx.fillText('LEETCODE', fx + fw * 0.29, boxY + boxH * 0.36);
     ctx.fillText('CODEFORCES', fx + fw * 0.71, boxY + boxH * 0.36);
 
     ctx.fillStyle = '#38bdf8';
-    ctx.font = '900 46px sans-serif';
+    ctx.font = '900 50px sans-serif';
     ctx.fillText('1561', fx + fw * 0.29, boxY + boxH * 0.80);
     ctx.fillText('1281', fx + fw * 0.71, boxY + boxH * 0.80);
 
@@ -230,12 +230,12 @@ function Band({
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1.5]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1.5]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1.5]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.5, 0]
+    [0, 1.6, 0]
   ]);
 
   useEffect(() => {
@@ -278,21 +278,21 @@ function Band({
 
   return (
     <>
-      <group position={[0, 4, 0]}>
+      <group position={[0, 7.5, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
+        <RigidBody position={[0, -1.5, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}>
+        <RigidBody position={[0, -3.0, 0]} ref={j2} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
+        <RigidBody position={[0, -4.5, 0]} ref={j3} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
-          <CuboidCollider args={[0.8, 1.125, 0.01]} />
+        <RigidBody position={[0, -6.0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
+          <CuboidCollider args={[1.0, 1.4, 0.01]} />
           <group
-            scale={2.25}
+            scale={2.9}
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}

@@ -165,8 +165,8 @@ const Hero = () => {
           </div>
 
           {/* Right Column: Interactive 3D Lanyard VIP Conference Pass */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', minHeight: '550px' }}>
-            <Lanyard position={[0, 0, 24]} gravity={[0, -40, 0]} lanyardWidth={1.2} />
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', minHeight: '650px', position: 'relative', overflow: 'visible' }}>
+            <Lanyard position={[0, 0, 17]} fov={22} gravity={[0, -40, 0]} lanyardWidth={1.5} />
           </div>
 
         </div>
