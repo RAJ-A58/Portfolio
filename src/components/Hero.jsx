@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code2, Terminal } from 'lucide-react';
 import Dither from './Dither.jsx';
-import Lanyard from './Lanyard.jsx';
+import TiltCard from './TiltCard.jsx';
 
 const Hero = () => {
   return (
@@ -164,9 +164,86 @@ const Hero = () => {
 
           </div>
 
-          {/* Right Column: Interactive 3D Lanyard VIP Conference Pass */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', minHeight: '650px', position: 'relative', overflow: 'visible' }}>
-            <Lanyard position={[0, 0, 17]} fov={22} gravity={[0, -40, 0]} lanyardWidth={1.5} />
+          {/* Right Column: Interactive 3D Profile & Rating Card */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', minHeight: '520px', position: 'relative', zIndex: 10 }}>
+            <TiltCard maxAngle={14} glareOpacity={0.25} style={{ width: '100%', maxWidth: '420px' }}>
+              <div style={{
+                background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(7, 7, 9, 0.95))',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: '28px',
+                padding: '2.5rem 2rem',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(56, 189, 248, 0.1)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Top Subtle Glow */}
+                <div style={{ position: 'absolute', top: '-50px', left: '50%', transform: 'translateX(-50%)', width: '200px', height: '100px', background: 'radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+                {/* Avatar */}
+                <div style={{
+                  width: '130px',
+                  height: '130px',
+                  borderRadius: '50%',
+                  border: '3px solid rgba(56, 189, 248, 0.4)',
+                  padding: '5px',
+                  background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2))',
+                  marginBottom: '1.5rem',
+                  boxShadow: '0 10px 25px -5px rgba(56, 189, 248, 0.3)'
+                }}>
+                  <img
+                    src="/raj-avatar.png"
+                    alt="Raj Patil"
+                    style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+                  />
+                </div>
+
+                {/* Name & Title */}
+                <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', margin: '0 0 0.3rem 0', letterSpacing: '-0.03em' }}>
+                  RAJ PATIL
+                </h3>
+                <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500, margin: '0 0 2rem 0' }}>
+                  Systems Software Engineer & RL Researcher
+                </p>
+
+                {/* Competitive Stats Box */}
+                <div style={{
+                  width: '100%',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '16px',
+                  padding: '1.25rem 1rem',
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '1rem',
+                  position: 'relative'
+                }}>
+                  {/* Vertical Divider */}
+                  <div style={{ position: 'absolute', top: '15%', bottom: '15%', left: '50%', width: '1px', background: 'rgba(255, 255, 255, 0.1)' }} />
+                  
+                  <div>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.05em', marginBottom: '0.3rem' }}>
+                      LEETCODE
+                    </div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#38bdf8' }}>
+                      1561
+                    </div>
+                  </div>
+
+                  <div>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.05em', marginBottom: '0.3rem' }}>
+                      CODEFORCES
+                    </div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#a855f7' }}>
+                      1281
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TiltCard>
           </div>
 
         </div>
