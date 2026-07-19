@@ -14,6 +14,15 @@ const Certifications = () => {
       icon: <Trophy size={28} style={{ color: '#ff9900' }} />
     },
     {
+      title: 'Advanced System Design & Distributed Architecture',
+      issuer: 'Professional System Design Certification',
+      description: 'Mastered high-level system architecture, distributed systems design, horizontal/vertical scaling, caching layers, load balancing, database sharding, CAP theorem, and microservices design patterns.',
+      credentialId: 'SYS-DESIGN-CERT-2026',
+      link: 'https://github.com/RAJ-A58',
+      badgeColor: '#38bdf8',
+      icon: <Award size={28} style={{ color: '#38bdf8' }} />
+    },
+    {
       title: 'Competitive Programming — LeetCode 1561 & CF 1281',
       issuer: 'LeetCode (1561 Contest Rating) • Codeforces (1281 Max)',
       description: 'Solved over 350 algorithmic challenges on LeetCode. Achieved a Contest Rating of 1561 on LeetCode and a max rating of 1281 on Codeforces, mastering dynamic programming, graphs, trees, and constraint programming.',
