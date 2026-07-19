@@ -14,11 +14,11 @@ const Certifications = () => {
       icon: <Trophy size={28} style={{ color: '#ff9900' }} />
     },
     {
-      title: 'Advanced System Design & Distributed Architecture',
-      issuer: 'Professional System Design Certification',
-      description: 'Mastered high-level system architecture, distributed systems design, horizontal/vertical scaling, caching layers, load balancing, database sharding, CAP theorem, and microservices design patterns.',
-      credentialId: 'SYS-DESIGN-CERT-2026',
-      link: 'https://github.com/RAJ-A58',
+      title: 'Tutedude System Design Course Completion',
+      issuer: 'Tutedude • Issued 15th July 2026',
+      description: 'Successfully completed the comprehensive Tutedude System Design course, mastering scalable software architecture, distributed systems, horizontal & vertical scaling, load balancing, and high-availability design patterns.',
+      credentialId: 'TD-RAJ-SD-2132',
+      link: 'https://tutedude.com',
       badgeColor: '#38bdf8',
       icon: <Award size={28} style={{ color: '#38bdf8' }} />
     },
