@@ -101,9 +101,9 @@ const Hero = () => {
               flexWrap: 'wrap',
               marginBottom: '2.5rem'
             }}>
-              <a href="#projects" className="btn-primary">
-                <span>Explore Projects</span>
-                <ArrowRight size={18} />
+              <a href="mailto:rajpatil280906@gmail.com" className="btn-primary">
+                <Mail size={18} />
+                <span>Get In Touch</span>
               </a>
               
               {/* Resume link */}

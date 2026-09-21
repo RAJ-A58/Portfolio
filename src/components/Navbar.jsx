@@ -19,11 +19,8 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Achievements', href: '#certifications' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'GitHub', href: 'https://github.com/RAJ-A58', external: true },
+    { name: 'Resume', href: '/resume.pdf', external: true },
   ];
 
   return (
@@ -61,6 +58,8 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noreferrer' : undefined}
               style={{
                 fontSize: '0.95rem',
                 fontWeight: 500,
@@ -73,7 +72,7 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <a href="#contact" className="btn-primary" style={{ padding: '0.5rem 1.2rem', fontSize: '0.9rem' }}>
+          <a href="mailto:rajpatil280906@gmail.com" className="btn-primary" style={{ padding: '0.5rem 1.2rem', fontSize: '0.9rem' }}>
             Hire Me
           </a>
         </nav>
@@ -108,6 +107,8 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noreferrer' : undefined}
               onClick={() => setMobileMenuOpen(false)}
               style={{ color: 'var(--text-main)', fontWeight: 500, fontSize: '1.1rem' }}
             >
@@ -115,7 +116,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#contact"
+            href="mailto:rajpatil280906@gmail.com"
             onClick={() => setMobileMenuOpen(false)}
             className="btn-primary"
             style={{ width: '100%', justifyContent: 'center' }}
